@@ -11,8 +11,8 @@
       "it": "Esplora la Giudecca di notte, affronta frati e preti non-morti e spezza il voto del Redentore."
     },
     "long": {
-      "en": "A 3D action RPG set in Venice: the Church of the Redentore and the Friars' Garden on the Giudecca, the Pia Casa delle Zitelle and, by gondola across the basin, the island of San Giorgio Maggiore.\n\nPick your hero among five lost souls of the lagoon (the Risen, Bortolo the drowned gondolier, Sister Fosca of the Lazzaretto Vecchio, Friar Tizian of Murano and Zanetto the bell-ringer), each with their own school of magic, and fight through three levels of quests, elites and bosses: the Most Reverend under the dome, the Governess of the Zitelle and the Abbot of San Giorgio.\n\nAt every level-up pick a gift from three cards, gather green, blue and epic loot, trade with Mastro Iseppo and Friar Bortolo, and set up your ability bar. Play on a computer with keyboard and mouse, or on phone and tablet with the virtual stick.",
-      "it": "Un action RPG in 3D ambientato a Venezia: la Chiesa del Redentore e l'Orto dei Frati alla Giudecca, la Pia Casa delle Zitelle e, in gondola sul bacino, l'isola di San Giorgio Maggiore.\n\nScegli il tuo eroe tra cinque anime perdute della laguna (il Risorto, Bortolo il gondoliere annegato, Suor Fosca del Lazzaretto Vecchio, Fra' Tizian di Murano e Zanetto il campanaro), ognuno con la sua scuola di magia, e attraversa tre livelli di missioni, élite e boss: il Reverendissimo sotto la cupola, la Governatrice delle Zitelle e l'Abate di San Giorgio.\n\nA ogni livello scegli un dono tra tre carte, raccogli bottino verde, blu ed epico, commercia con Mastro Iseppo e Fra' Bortolo, e personalizza la barra delle abilità. Si gioca da computer con tastiera e mouse o da telefono e tablet con lo stick virtuale."
+      "en": "A 3D action RPG set in Venice: the Church of the Redentore and the Friars' Garden on the Giudecca, the Pia Casa delle Zitelle and, by gondola across the basin, the island of San Giorgio Maggiore.\n\nPick your hero among five lost souls of the lagoon (the Risen, Bortolo the drowned gondolier, Sister Fosca of the Lazzaretto Vecchio, Friar Tizian of Murano and Zanetto the bell-ringer), each with their own primary and secondary schools of magic, and fight through three levels of quests, elites and bosses: the Most Reverend under the dome, the Governess of the Zitelle and the Abbot of San Giorgio.\n\nAt every level-up pick a gift from three cards, gather green, blue and epic loot, trade with Mastro Iseppo and Friar Bortolo, and set up your ability bar. Play on a computer with keyboard and mouse, or on phone and tablet with the virtual stick.",
+      "it": "Un action RPG in 3D ambientato a Venezia: la Chiesa del Redentore e l'Orto dei Frati alla Giudecca, la Pia Casa delle Zitelle e, in gondola sul bacino, l'isola di San Giorgio Maggiore.\n\nScegli il tuo eroe tra cinque anime perdute della laguna (il Risorto, Bortolo il gondoliere annegato, Suor Fosca del Lazzaretto Vecchio, Fra' Tizian di Murano e Zanetto il campanaro), ognuno con le proprie scuole di magia primaria e secondaria, e attraversa tre livelli di missioni, élite e boss: il Reverendissimo sotto la cupola, la Governatrice delle Zitelle e l'Abate di San Giorgio.\n\nA ogni livello scegli un dono tra tre carte, raccogli bottino verde, blu ed epico, commercia con Mastro Iseppo e Fra' Bortolo, e personalizza la barra delle abilità. Si gioca da computer con tastiera e mouse o da telefono e tablet con lo stick virtuale."
     },
     "icon": "/games/redentore/icon.png",
     "hero": "/games/redentore/shot-5.jpg",
@@ -33,6 +33,21 @@
     },
     "playUrl": "/Redentore/",
     "news": [
+      {
+        "date": "2026-11-02",
+        "title": { "en": "Separate health and mana vials", "it": "Fiale separate per vita e mana" },
+        "text": { "en": "Fiala di linfa tombale restores health; Fiala di essenza spettrale restores mana. Each restores 30% with its own 30-second base cooldown, and separate amount and cooldown upgrades. Earned potion upgrades are preserved. Default keys R/T are remappable; existing custom bindings take priority.", "it": "La Fiala di linfa tombale ripristina la vita; la Fiala di essenza spettrale il mana. Ciascuna recupera il 30% con una ricarica base indipendente di 30 secondi e potenziamenti separati per quantità e ricarica. I potenziamenti già ottenuti restano. Tasti predefiniti R/T, riassegnabili: i comandi personalizzati esistenti hanno precedenza." }
+      },
+      {
+        "date": "2026-11-02",
+        "title": { "en": "Zone notes on your Mongames account", "it": "Note di zona sul tuo account Mongames" },
+        "text": { "en": "New zone notes stay saved locally and, when signed in, attempt to upload to Mongames. Local copies and exports remain available offline or signed out; older notes are not resent automatically.", "it": "Le nuove note di zona restano salvate in locale e, se hai effettuato l'accesso, tentano l'invio a Mongames. Copie locali ed esportazione restano disponibili anche offline o senza accesso; le note precedenti non vengono reinviate automaticamente." }
+      },
+      {
+        "date": "2026-11-02",
+        "title": { "en": "Primary and secondary magic schools", "it": "Scuole di magia primarie e secondarie" },
+        "text": { "en": "The seven magic schools each have three mana and two fury specials. Gold medals mark your hero's primary schools, silver medals their secondary schools. Books, cards and tomes are filtered to match the relevant schools.", "it": "Le sette scuole di magia hanno ciascuna tre abilità speciali a mana e due a furia. Le medaglie d'oro indicano le scuole primarie del tuo eroe, quelle d'argento le secondarie. Libri, carte e tomi sono filtrati in base alle scuole pertinenti." }
+      },
       {
         "date": "2026-11-02",
         "title": { "en": "Three cards every level", "it": "Tre carte a ogni livello" },
