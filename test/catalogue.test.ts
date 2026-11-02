@@ -18,26 +18,38 @@ test('ids are unique and valid save game_ids (see supabase/schema.sql)', () => {
   for (const id of ids) assert.match(id, /^[a-z0-9-]{1,64}$/);
 });
 
+const LANGS = ['en', 'it'];
+/** A localized value: `{ en, it }`, every language filled. */
+function localized(v: Record<string, unknown>, what: string) {
+  assert.deepEqual(Object.keys(v ?? {}).sort(), [...LANGS].sort(), `${what}: needs exactly ${LANGS.join(', ')}`);
+  for (const l of LANGS) {
+    const x = v[l];
+    if (Array.isArray(x)) assert.ok(x.length && x.every((s) => typeof s === 'string' && s.trim()), `${what}.${l} empty`);
+    else assert.ok(typeof x === 'string' && x.trim(), `${what}.${l} empty`);
+  }
+}
+
 for (const g of games) {
-  test(`${g.id}: every field is filled and every image exists`, () => {
-    for (const k of ['title', 'subtitle', 'short', 'long', 'icon', 'hero', 'playUrl']) {
+  test(`${g.id}: every field is filled in English and Italian, every image exists`, () => {
+    for (const k of ['title', 'icon', 'hero', 'playUrl']) {
       assert.equal(typeof g[k], 'string', k);
       assert.ok(g[k].trim(), `${k} empty`);
     }
-    assert.ok(g.short.length <= 160, 'short description too long for a card');
+    for (const k of ['subtitle', 'short', 'long', 'tags', 'platforms']) localized(g[k], k);
+    for (const l of LANGS) assert.ok(g.short[l].length <= 160, `short.${l} too long for a card`);
     assert.match(g.playUrl, /^\/[^/].*\/$|^https:\/\//, 'playUrl is a same-origin path like /Gioco/');
     assert.ok(file(g.icon), `missing ${g.icon}`);
     assert.ok(file(g.hero), `missing ${g.hero}`);
     assert.ok(g.screenshots.length >= 1);
     for (const s of g.screenshots) {
       assert.ok(file(s.src), `missing ${s.src}`);
-      assert.ok(s.alt?.trim(), `screenshot ${s.src} needs alt text`);
+      localized(s.alt, `alt of ${s.src}`);
     }
-    assert.ok(g.tags.length >= 1 && g.platforms.length >= 1);
     for (const n of g.news) {
       assert.match(n.date, /^\d{4}-\d{2}-\d{2}$/);
       assert.ok(!Number.isNaN(Date.parse(n.date)));
-      assert.ok(n.title.trim() && n.text.trim());
+      localized(n.title, `news ${n.date} title`);
+      localized(n.text, `news ${n.date} text`);
     }
   });
 }

@@ -7,11 +7,15 @@ con i salvataggi sul dispositivo.
 
 Sito statico, Vite + TypeScript, nessun framework. Account e salvataggi su Supabase (progetto "Mongames").
 
+Il sito è in inglese; il pulsante IT/EN in alto a destra passa all'italiano e la scelta resta salvata
+in quel browser. Tutti i testi dell'interfaccia (inclusi i messaggi di errore di Supabase) sono in
+`src/i18n.ts`, una sezione `en` e una `it` con le stesse chiavi.
+
 | Pagina | File | Cosa fa |
 | --- | --- | --- |
 | `/` | `index.html`, `src/pages/home.ts` | gioco in evidenza, tutti i giochi, novità |
 | `/gioco.html?id=<id>` | `gioco.html`, `src/pages/game.ts` | scheda del gioco con galleria e Gioca |
-| `/accedi.html` | `accedi.html`, `src/pages/login.ts` | accedi, registrati (`?modo=registrati`), password dimenticata (`?modo=recupero`); `?next=/Percorso/` riporta lì dopo l'accesso |
+| `/accedi.html` | `accedi.html`, `src/pages/login.ts` | accedi, registrati (`?mode=signup`), password dimenticata (`?mode=reset`); `?next=/Percorso/` riporta lì dopo l'accesso |
 | `/nuova-password.html` | `nuova-password.html`, `src/pages/reset.ts` | arrivo dal link "password dimenticata", e "Cambia password" dal menu account |
 | `/hub/saves.js` | `src/saves.ts`, `src/saves-core.ts` | client dei salvataggi per i giochi (sotto) |
 
@@ -40,21 +44,22 @@ GitHub Pages con sorgente "GitHub Actions" nelle impostazioni del repo.
 {
   "id": "nomegioco",
   "title": "Nome Gioco",
-  "subtitle": "Una riga sotto il titolo",
-  "short": "Una o due frasi per la scheda (max 160 caratteri).",
-  "long": "Descrizione lunga.\n\nI paragrafi si separano con una riga vuota.",
+  "subtitle": { "en": "One line under the title", "it": "Una riga sotto il titolo" },
+  "short": { "en": "One or two sentences for the card.", "it": "Una o due frasi per la scheda (max 160 caratteri)." },
+  "long": { "en": "Long description.\n\nParagraphs are split by a blank line.", "it": "Descrizione lunga.\n\nI paragrafi si separano con una riga vuota." },
   "icon": "/games/nomegioco/icon.png",
   "hero": "/games/nomegioco/shot-1.jpg",
-  "screenshots": [{ "src": "/games/nomegioco/shot-1.jpg", "alt": "Cosa si vede" }],
-  "tags": ["Puzzle"],
-  "platforms": ["Computer", "Telefono"],
+  "screenshots": [{ "src": "/games/nomegioco/shot-1.jpg", "alt": { "en": "What you see", "it": "Cosa si vede" } }],
+  "tags": { "en": ["Puzzle"], "it": ["Puzzle"] },
+  "platforms": { "en": ["Computer", "Phone"], "it": ["Computer", "Telefono"] },
   "playUrl": "/NomeGioco/",
-  "news": [{ "date": "2026-11-02", "title": "Uscito!", "text": "Prima versione giocabile." }]
+  "news": [{ "date": "2026-11-02", "title": { "en": "Out now!", "it": "Uscito!" }, "text": { "en": "First playable version.", "it": "Prima versione giocabile." } }]
 }
 ```
 
 `id` è anche il `game_id` dei salvataggi: solo minuscole, cifre e trattini. Il primo gioco della lista
-è quello in evidenza in home. `npm run check` controlla che ogni campo ci sia e che le immagini esistano.
+è quello in evidenza in home. Ogni testo va dato in inglese (`en`) e italiano (`it`); `npm run check`
+controlla che ogni campo ci sia in entrambe le lingue e che le immagini esistano.
 
 ## Salvataggi nel cloud (per i giochi)
 

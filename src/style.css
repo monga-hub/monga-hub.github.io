@@ -206,3 +206,10 @@ input:focus { outline: 3px solid rgb(10 102 228 / 0.3); border-color: var(--acce
   .cards { grid-template-columns: minmax(0, 1fr); }
   .auth-card { margin: 8px 0; padding: 22px; }
 }
+
+/* Language switch */
+.lang {
+  min-width: 40px; height: 32px; padding: 0 8px; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--muted); font: inherit; font-size: 0.8rem; font-weight: 700; cursor: pointer;
+}
+.lang:hover { color: var(--text); }
