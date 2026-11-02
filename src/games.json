@@ -1,0 +1,26 @@
+[
+  {
+    "id": "redentore",
+    "title": "Redentore",
+    "subtitle": "Dungeon 3D nella Venezia dei non-morti",
+    "short": "Esplora la Giudecca di notte, affronta frati e preti non-morti e spezza il voto del Redentore.",
+    "long": "Un action RPG in 3D ambientato a Venezia: la Chiesa del Redentore e l'Orto dei Frati alla Giudecca, la Pia Casa delle Zitelle e, in gondola sul bacino, l'isola di San Giorgio Maggiore.\n\nScegli il tuo eroe tra cinque anime perdute della laguna (il Risorto, Bortolo il gondoliere annegato, Suor Fosca del Lazzaretto Vecchio, Fra' Tizian di Murano e Zanetto il campanaro), ognuno con la sua scuola di magia, e attraversa tre livelli di missioni, élite e boss: il Reverendissimo sotto la cupola, la Governatrice delle Zitelle e l'Abate di San Giorgio.\n\nA ogni livello scegli un dono tra tre carte, raccogli bottino verde, blu ed epico, commercia con Mastro Iseppo e Fra' Bortolo, e personalizza la barra delle abilità. Si gioca da computer con tastiera e mouse o da telefono e tablet con lo stick virtuale.",
+    "icon": "/games/redentore/icon.png",
+    "hero": "/games/redentore/shot-5.jpg",
+    "screenshots": [
+      { "src": "/games/redentore/shot-1.jpg", "alt": "La scelta della squadra: cinque eroi sull'isola-cimitero in laguna" },
+      { "src": "/games/redentore/shot-2.jpg", "alt": "Il pontile sulla laguna visto dall'alto, con la minimappa e le missioni" },
+      { "src": "/games/redentore/shot-3.jpg", "alt": "Mastro Iseppo sull'approdo di San Giorgio" },
+      { "src": "/games/redentore/shot-4.jpg", "alt": "Salita di livello: tre carte tra cui scegliere un dono" },
+      { "src": "/games/redentore/shot-5.jpg", "alt": "L'Abate di San Giorgio nel Cenacolo palladiano" }
+    ],
+    "tags": ["Action RPG", "3D", "Venezia", "Fantasy oscuro"],
+    "platforms": ["Computer", "Telefono", "Tablet"],
+    "playUrl": "/Redentore/",
+    "news": [
+      { "date": "2026-11-02", "title": "Tre carte a ogni livello", "text": "A ogni salita di livello scegli tra tre doni, e i potenziamenti salgono di rango senza limite." },
+      { "date": "2026-11-02", "title": "Comandi personalizzabili", "text": "Dal menu, il pannello Comandi permette di riassegnare i tasti di movimento e della barra delle abilità." },
+      { "date": "2026-11-01", "title": "Mastro Iseppo a San Giorgio", "text": "Il mercante della gondola ora commercia anche sull'approdo del livello 3." }
+    ]
+  }
+]
