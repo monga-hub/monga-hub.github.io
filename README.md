@@ -22,6 +22,13 @@ in quel browser. Tutti i testi dell'interfaccia (inclusi i messaggi di errore di
 La cornice (barra in alto con l'account, lista dei giochi a sinistra, che su telefono diventa una
 striscia) è in `src/ui.ts`; lo stile in `src/style.css`.
 
+Il sito è un'app installabile (PWA) con tema scuro. `public/manifest.webmanifest` ha `scope: "/"`, quindi
+anche i giochi sotto lo stesso dominio (`/Redentore/`) si aprono dentro l'app, senza barra del browser.
+`public/sw.js` serve solo a renderla installabile: non mette niente in cache, quindi gli aggiornamenti
+dei giochi arrivano subito. Il pulsante "Installa app" in alto usa il prompt del browser (Chrome, Edge,
+Android) o, su iPhone/iPad, mostra i passaggi Condividi → Aggiungi alla schermata Home; dentro l'app
+installata non compare.
+
 ## Sviluppo
 
 ```sh
