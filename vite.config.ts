@@ -10,11 +10,12 @@ export default defineConfig({
         accedi: 'accedi.html',
         'nuova-password': 'nuova-password.html',
         saves: 'src/saves.ts',
+        notes: 'src/notes.ts',
       },
-      // Keep the save client's exports and give it a fixed URL games can import.
+      // Keep the game clients' exports and give it a fixed URL games can import.
       preserveEntrySignatures: 'exports-only',
       output: {
-        entryFileNames: (c) => (c.name === 'saves' ? 'hub/saves.js' : 'assets/[name]-[hash].js'),
+        entryFileNames: (c) => (['saves', 'notes'].includes(c.name) ? `hub/${c.name}.js` : 'assets/[name]-[hash].js'),
       },
     },
   },

@@ -17,6 +17,7 @@ in quel browser. Tutti i testi dell'interfaccia (inclusi i messaggi di errore di
 | `/gioco.html?id=<id>` | `gioco.html`, `src/pages/game.ts` | scheda del gioco con galleria e Gioca |
 | `/accedi.html` | `accedi.html`, `src/pages/login.ts` | accedi, registrati (`?mode=signup`), password dimenticata (`?mode=reset`); `?next=/Percorso/` riporta lì dopo l'accesso |
 | `/nuova-password.html` | `nuova-password.html`, `src/pages/reset.ts` | arrivo dal link "password dimenticata", e "Cambia password" dal menu account |
+| `/hub/notes.js` | `src/notes.ts`, `src/notes-core.ts` | invio e lettura delle proprie note (sotto) |
 | `/hub/saves.js` | `src/saves.ts`, `src/saves-core.ts` | client dei salvataggi per i giochi (sotto) |
 
 La cornice (barra in alto con l'account, lista dei giochi a sinistra, che su telefono diventa una
@@ -34,7 +35,7 @@ installata non compare.
 ```sh
 npm install
 npm run dev      # http://localhost:5173
-npm run check    # build + test (client dei salvataggi con supabase finto, dati del catalogo)
+npm run check    # build + test (client di salvataggi e note con Supabase finto, dati del catalogo)
 ```
 
 Il deploy parte da solo a ogni push su `main` (`.github/workflows/deploy.yml`), una volta attivato
@@ -100,6 +101,54 @@ const stop = cloud?.onUserChange((u) => { /* accesso o uscita */ });
 
 Dietro c'è la tabella `saves` (`supabase/schema.sql`): una riga per (utente, gioco, slot), e la Row
 Level Security fa sì che ognuno legga e scriva solo le proprie righe.
+
+## Note dei giocatori (per i giochi)
+
+L'hub pubblica `/hub/notes.js`, modulo ES con la stessa sessione e lo stesso client Supabase di
+`/hub/saves.js`. Il gioco conserva la nota locale se l'import fallisce, `submit` restituisce `false`
+o viene lanciato un errore di rete/database/sessione.
+
+```js
+try {
+  const notes = await import(/* @vite-ignore */ '/hub/notes.js');
+  const sent = await notes.submit('redentore', {
+    category: 'bug',
+    text: 'La porta della cripta non si apre.',
+    zone: 'Cripta',
+    level: 3,
+    hero: 'Ada',
+    position: { x: 12, y: 8 },
+    gameVersion: '1.2.0',
+    createdAt: new Date().toISOString(), // data originale della nota sul dispositivo
+  });
+  // sent === true: inserita; false: giocatore non connesso, tenere la nota locale.
+  const mine = await notes.list('redentore');
+  // [{ id, category, text, zone, level, hero, position, gameVersion,
+  //    createdAt, serverCreatedAt, status }], ricezione server più recente per prima.
+} catch (error) {
+  // Tenere la nota locale e permettere un nuovo tentativo.
+}
+```
+
+- `gameId`: 1–64 caratteri, solo minuscole, cifre e trattini, come nei salvataggi.
+- Obbligatori: `category` (`bug`, `nome`, `grafica`, `altro`), `text` (1–5000 caratteri,
+  non solo spazi), `createdAt` (timestamp ISO della creazione sul dispositivo).
+- Facoltativi/null: `zone` e `hero` (max 200 caratteri), `level` (intero >= 0),
+  `position` (oggetto JSON), `gameVersion` (max 100 caratteri). I limiti sono imposti dal database.
+- Da non connesso: nessuna richiesta al database; `submit` → `false`, `list` → `[]`.
+- Ogni invio crea una nuova riga: ripetere un invio già riuscito può creare duplicati.
+- `list` legge solo le note del giocatore per quel gioco, entro il limite di righe configurato in
+  Supabase. `createdAt` è la data del dispositivo; `serverCreatedAt` è la ricezione nel database.
+- Gli utenti possono solo inserire e leggere le proprie note, mai aggiornarle o cancellarle.
+  Il server assegna ID, data di ricezione e stato `nuova`; gli stati di revisione sono
+  `nuova`, `approvata`, `risolta`, `scartata`. Gli anonimi non hanno accesso.
+
+Per attivare la tabella, incollare tutto `supabase/notes.sql` nel **SQL Editor** del progetto
+Mongames (`https://dlvwczxlnqswfehfpzuy.supabase.co`) ed eseguire **Run**; è rieseguibile.
+Nel dashboard: **Table Editor → notes**, filtrare per `game_id`, `category` o `status` e leggere/modificare lo stato.
+Per esportare: applicare i filtri desiderati e scegliere **Export CSV**; l'accesso amministrativo del dashboard bypassa RLS.
+
+L'integrazione dell'invio dentro Redentore è separata: questo modulo da solo non invia note dal gioco.
 
 ## Configurazione Supabase (una volta sola)
 
