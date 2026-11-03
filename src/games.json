@@ -34,6 +34,26 @@
     "playUrl": "/Redentore/",
     "news": [
       {
+        "date": "2026-11-03",
+        "title": { "en": "12 armor models, 36 rarity finishes", "it": "12 modelli di armatura, 36 finiture di rarità" },
+        "text": { "en": "Sister Fosca, Bortolo, Friar Tizian and Zanetto each get three armor models, with palettes specific to the hero and world, plus illustrated equipment icons on isolated backgrounds. The rarity border no longer dictates garment colors. The Risen is unchanged.", "it": "Suor Fosca, Bortolo, Fra' Tizian e Zanetto hanno tre modelli di armatura ciascuno, con palette proprie dell'eroe e del mondo e icone illustrate dell'equipaggiamento su sfondo isolato. Il bordo di rarità non impone il colore degli abiti. Il Risorto resta invariato." }
+      },
+      {
+        "date": "2026-11-03",
+        "title": { "en": "Clearer lighting indoors and out", "it": "Luce più leggibile al chiuso e all'aperto" },
+        "text": { "en": "Improved world lighting in both WoW and Diablo views makes scenery and characters easier to see, indoors and outdoors, while retaining the contrast between torchlight and shadows.", "it": "L'illuminazione degli ambienti migliora nelle visuali WoW e Diablo: scenari e personaggi sono più visibili, al chiuso e all'aperto, mantenendo il contrasto tra torce e ombre." }
+      },
+      {
+        "date": "2026-11-03",
+        "title": { "en": "Damage and healing numbers in motion", "it": "Numeri di danno e cura in movimento" },
+        "text": { "en": "In WoW and Diablo views, damage and healing numbers spring in short arcs from enemy health bars and follow the bar and camera as they move. Alternating, staggered bursts are easier to read; healing shows a green plus sign. Values are unchanged.", "it": "Nelle visuali WoW e Diablo, i numeri di danno e cura scattano in brevi archi dalle barre vita dei nemici e ne seguono il movimento e la telecamera. Le raffiche alternate e sfalsate sono più leggibili; le cure mostrano un più verde. I valori restano invariati." }
+      },
+      {
+        "date": "2026-11-03",
+        "title": { "en": "Basic attack targeting corrected", "it": "Corretto il bersaglio automatico dell'attacco base" },
+        "text": { "en": "Automatic targeting for basic attacks no longer skips a nearby, reachable enemy just because scenery blocks the camera's view. It uses the hero's line of sight, respecting walls, range, cooldowns and manual target selection.", "it": "Il bersaglio automatico dell'attacco base non esclude più un nemico vicino e raggiungibile solo perché uno scenario copre la visuale della telecamera. Conta la linea di vista dell'eroe, nel rispetto di muri, portata, ricarica e selezione manuale del bersaglio." }
+      },
+      {
         "date": "2026-11-02",
         "title": { "en": "Separate health and mana vials", "it": "Fiale separate per vita e mana" },
         "text": { "en": "Fiala di linfa tombale restores health; Fiala di essenza spettrale restores mana. Both icons share the same flask shape: green for health, blue for mana, with labels and tooltips identifying the resource. Each restores 30% with its own 30-second base cooldown, and separate amount and cooldown upgrades. Earned potion upgrades are preserved. Default keys R/T are remappable; existing custom bindings take priority.", "it": "La Fiala di linfa tombale ripristina la vita; la Fiala di essenza spettrale il mana. Le due icone hanno la stessa sagoma di fiala: verde per la vita, blu per il mana, con etichette e tooltip che identificano la risorsa. Ciascuna recupera il 30% con una ricarica base indipendente di 30 secondi e potenziamenti separati per quantità e ricarica. I potenziamenti già ottenuti restano. Tasti predefiniti R/T, riassegnabili: i comandi personalizzati esistenti hanno precedenza." }
