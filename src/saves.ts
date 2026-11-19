@@ -4,4 +4,4 @@
 import { supabase } from './supabase.ts';
 import { createSaves } from './saves-core.ts';
 
-export const { user, load, save, list, remove, onUserChange } = createSaves(supabase);
+export const { user, load, save, list, remove, loadVersioned, saveVersioned, onUserChange } = createSaves(supabase);

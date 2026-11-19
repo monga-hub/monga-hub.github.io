@@ -45,7 +45,7 @@ export function game() {
           <dt>${t.platforms}</dt><dd>${tr(g.platforms).map(esc).join(', ')}</dd>
           <dt>${t.genre}</dt><dd>${tags.map(esc).join(', ')}</dd>
           <dt>${t.price}</dt><dd>${t.free}</dd>
-          <dt>${t.saves}</dt><dd>${t.savesInfo}</dd>
+          <dt>${t.saves}</dt><dd>${g.localSaves ? esc(tr(g.localSaves)) : t.savesInfo}</dd>
         </dl>
       </aside>
     </div>
@@ -74,6 +74,10 @@ export function game() {
   box.addEventListener('click', (e) => { if (e.target === box) box.close(); });
 
   const status = main.querySelector('#save-status')!;
+  if (g.localSaves) {
+    status.textContent = tr(g.localSaves);
+    return;
+  }
   onUser(async (u) => {
     if (!u) {
       const link = `<a href="/accedi.html?next=${encodeURIComponent(location.pathname + location.search)}">${t.signIn}</a>`;

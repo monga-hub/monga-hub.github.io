@@ -104,5 +104,111 @@
         "text": { "en": "The gondola merchant now also trades on the level 3 landing.", "it": "Il mercante della gondola ora commercia anche sull'approdo del livello 3." }
       }
     ]
+  },
+  {
+    "id": "officina-1907",
+    "title": "Officina 1907",
+    "subtitle": {
+      "en": "Build a factory, care for its people",
+      "it": "Sviluppa la fabbrica, prenditi cura delle persone"
+    },
+    "short": {
+      "en": "Manage three departments, hire workers and choose your next action on the city board. Play against AI or share the table.",
+      "it": "Gestisci tre reparti, assumi operai e scegli le azioni sulla plancia della città. Sfida l’IA o condividi il tavolo."
+    },
+    "long": {
+      "en": "A board game of production, workers and welfare. Develop your textile, chemical and metal departments, manage tension and choose your next action around the city.\n\nPlay with the original industrial artwork, a complete city board and three production strips. Start a new game or resume your active match, alone against AI or with up to three people on the same screen.\n\nGuest games stay on the device. With Mongames, your active account game can sync between devices; local and cloud copies remain separate when they conflict.",
+      "it": "Un gioco da tavolo di produzione, lavoro e welfare. Sviluppa i reparti Tessile, Chimica e Metallurgia, gestisci la tensione e scegli la prossima azione nella città.\n\nGioca con la grafica industriale originale, la plancia cittadina completa e tre fasce produttive. Inizia una nuova partita o riprendi quella attiva, da solo contro l’IA oppure fino a tre persone sullo stesso schermo.\n\nLe partite ospite restano sul dispositivo. Con Mongames puoi sincronizzare la partita attiva del tuo account fra dispositivi; in caso di conflitto scegli quale copia riprendere."
+    },
+    "icon": "/games/officina-1907/icon.png",
+    "hero": "/games/officina-1907/tavolo.png",
+    "screenshots": [
+      {
+        "src": "/games/officina-1907/tavolo.png",
+        "alt": {
+          "en": "The complete industrial board, five market cards and three factory departments",
+          "it": "La plancia industriale completa, cinque carte mercato e i tre reparti della fabbrica"
+        }
+      }
+    ],
+    "tags": {
+      "en": [
+        "Board game",
+        "Strategy",
+        "Industrial"
+      ],
+      "it": [
+        "Gioco da tavolo",
+        "Strategia",
+        "Industriale"
+      ]
+    },
+    "platforms": {
+      "en": [
+        "Computer",
+        "Tablet"
+      ],
+      "it": [
+        "Computer",
+        "Tablet"
+      ]
+    },
+    "playUrl": "/officina/gioco/",
+    "news": []
+  },
+  {
+    "id": "pescaria",
+    "localSaves": {
+      "en": "Three local slots in this browser and device; no account sync.",
+      "it": "Tre slot locali in questo browser e dispositivo; nessuna sincronizzazione account."
+    },
+    "title": "Pescaria",
+    "subtitle": {
+      "en": "The lagoon fish market",
+      "it": "Il mercato della laguna"
+    },
+    "short": {
+      "en": "Bid for fish, fulfil customer orders and improve your market stall. Play against AI or share one device with other merchants.",
+      "it": "Compra pesce all’asta, soddisfa i clienti e migliora il tuo banco. Sfida l’IA o condividi il dispositivo con altri mercanti."
+    },
+    "long": {
+      "en": "Open your stall at the lagoon fish market. Over four days, bid for fish, fulfil contracts and improve your stall. Play against the automa or pass the same device between merchants. A guided tutorial helps you learn the game.\n\nThree local save slots keep your games in the current browser and device. Pescaria does not sync saves to your Mongames account.",
+      "it": "Apri il tuo banco al mercato della laguna. In quattro giornate, compra pesce all’asta, completa i contratti e migliora il banco. Gioca contro l’automa oppure passa lo stesso dispositivo agli altri mercanti. Un tutorial guidato ti aiuta a imparare.\n\nTre slot di salvataggio locali conservano le partite nel browser e dispositivo in uso. Pescaria non sincronizza i salvataggi con il tuo account Mongames."
+    },
+    "icon": "/games/pescaria/icon.png",
+    "hero": "/games/pescaria/ingresso.png",
+    "screenshots": [
+      {
+        "src": "/games/pescaria/ingresso.png",
+        "alt": {
+          "en": "Pescaria market setup, with merchant selection and the guided tutorial",
+          "it": "Preparazione del mercato di Pescaria, con scelta dei mercanti e tutorial guidato"
+        }
+      }
+    ],
+    "tags": {
+      "en": [
+        "Board game",
+        "Strategy",
+        "Auctions"
+      ],
+      "it": [
+        "Gioco da tavolo",
+        "Strategia",
+        "Aste"
+      ]
+    },
+    "platforms": {
+      "en": [
+        "Computer",
+        "Tablet"
+      ],
+      "it": [
+        "Computer",
+        "Tablet"
+      ]
+    },
+    "playUrl": "/pescaria/",
+    "news": []
   }
 ]

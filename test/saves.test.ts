@@ -8,7 +8,7 @@ function mockClient(session: { user: { id: string; email?: string } } | null, re
   let listener: ((e: string, s: unknown) => void) | null = null;
   let unsubscribed = false;
   const builder: Record<string, unknown> = {};
-  for (const m of ['select', 'upsert', 'delete', 'eq', 'order', 'maybeSingle']) {
+  for (const m of ['select', 'upsert', 'insert', 'update', 'delete', 'eq', 'order', 'maybeSingle']) {
     builder[m] = (...args: unknown[]) => { calls.push([m, ...args]); return builder; };
   }
   builder.then = (ok: (v: unknown) => unknown) => Promise.resolve({ data: null, error: null, ...result }).then(ok);
@@ -22,7 +22,7 @@ function mockClient(session: { user: { id: string; email?: string } } | null, re
     },
     from: (table: string) => { calls.push(['from', table]); return builder; },
   };
-  return { saves: createSaves(client as never), calls, fire: (s: unknown) => listener!('SIGNED_IN', s), unsubscribed: () => unsubscribed };
+  return { client, saves: createSaves(client as never), calls, fire: (s: unknown) => listener!('SIGNED_IN', s), unsubscribed: () => unsubscribed };
 }
 
 const alice = { user: { id: 'u-alice', email: 'alice@example.com' } };
@@ -95,4 +95,44 @@ test('onUserChange reports login and logout, and unsubscribes', async () => {
   assert.deepEqual(seen, [{ id: 'u-alice', email: 'alice@example.com' }, null]);
   off();
   assert.equal(m.unsubscribed(), true);
+});
+
+
+test('versioned save binds the expected account before any query', async () => {
+  const other = mockClient({ user: { id: 'u-bob' } });
+  assert.deepEqual(await other.saves.saveVersioned('u-alice', 'officina-1907', { turn: 2 }, null, 'active'), { status: 'account-changed' });
+  await assert.rejects(other.saves.loadVersioned('u-alice', 'officina-1907', 'active'), /Account changed/);
+  assert.deepEqual(other.calls, []);
+});
+
+test('versioned load scopes the row and exposes its server timestamp', async () => {
+  const { saves, calls } = mockClient(alice, { data: { data: { turn: 4 }, updated_at: 'revision-1' } });
+  assert.deepEqual(await saves.loadVersioned('u-alice', 'officina-1907', 'active'), { data: { turn: 4 }, version: 'revision-1' });
+  assert.ok(calls.some(c => c[0] === 'eq' && c[1] === 'user_id' && c[2] === 'u-alice'));
+  assert.ok(calls.some(c => c[0] === 'eq' && c[1] === 'game_id' && c[2] === 'officina-1907'));
+  assert.ok(calls.some(c => c[0] === 'eq' && c[1] === 'slot' && c[2] === 'active'));
+});
+
+test('versioned writes update only the expected version, or insert without upsert', async () => {
+  const { saves, calls } = mockClient(alice, { data: { updated_at: 'revision-2' } });
+  assert.deepEqual(await saves.saveVersioned('u-alice', 'officina-1907', { turn: 4 }, 'revision-1', 'active'), { status: 'saved', version: 'revision-2' });
+  assert.ok(calls.some(c => c[0] === 'eq' && c[1] === 'updated_at' && c[2] === 'revision-1'));
+  calls.length = 0;
+  await saves.saveVersioned('u-alice', 'officina-1907', { turn: 1 }, null, 'active');
+  assert.ok(calls.some(c => c[0] === 'insert'));
+  assert.ok(!calls.some(c => c[0] === 'upsert'));
+  const collision = mockClient(alice, { error: { code: '23505' } });
+  assert.deepEqual(await collision.saves.saveVersioned('u-alice', 'officina-1907', {}, null), { status: 'conflict' });
+  assert.deepEqual(await mockClient(alice).saves.saveVersioned('u-alice', 'officina-1907', {}, 'old'), { status: 'conflict' });
+});
+
+
+test('account changes while getSession resolves never target the new account', async () => {
+  const m = mockClient(alice);
+  let resume!: (value: {data: {session: {user: {id: string}}}}) => void;
+  m.client.auth.getSession = () => new Promise(resolve => { resume = resolve; });
+  const pending = m.saves.saveVersioned('u-alice', 'officina-1907', { private: 'alice' }, null);
+  resume({data: {session: {user: {id: 'u-bob'}}}});
+  assert.deepEqual(await pending, {status: 'account-changed'});
+  assert.deepEqual(m.calls, []);
 });

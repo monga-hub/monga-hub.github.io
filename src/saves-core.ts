@@ -36,6 +36,29 @@ export function createSaves(client: SupabaseClient) {
       return true;
     },
 
+    // Account-bound, optimistic writes for games that must never replace a
+    // divergent save. Existing load/save callers keep their original contract.
+    async loadVersioned(expectedUserId: string, gameId: string, slot = 'default') {
+      const u = await user();
+      if (!u || u.id !== expectedUserId) throw new Error('Account changed');
+      const { data, error } = await client.from('saves').select('data, updated_at')
+        .eq('user_id', u.id).eq('game_id', gameId).eq('slot', slot).maybeSingle();
+      if (error) throw error;
+      return data ? { data: data.data, version: data.updated_at as string } : null;
+    },
+
+    async saveVersioned(expectedUserId: string, gameId: string, data: unknown, expectedVersion: string | null, slot = 'default') {
+      const u = await user();
+      if (!u || u.id !== expectedUserId) return { status: 'account-changed' as const };
+      const query = expectedVersion === null
+        ? client.from('saves').insert({ user_id: u.id, game_id: gameId, slot, data })
+        : client.from('saves').update({ data }).eq('user_id', u.id).eq('game_id', gameId).eq('slot', slot).eq('updated_at', expectedVersion);
+      const { data: row, error } = await query.select('updated_at').maybeSingle();
+      if (error?.code === '23505') return { status: 'conflict' as const };
+      if (error) throw error;
+      return row ? { status: 'saved' as const, version: row.updated_at as string } : { status: 'conflict' as const };
+    },
+
     async list(gameId: string): Promise<SaveInfo[]> {
       const u = await user();
       if (!u) return [];

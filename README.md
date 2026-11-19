@@ -162,3 +162,9 @@ stare nel browser, perché i dati sono protetti dalla Row Level Security.
      `https://monga-hub.github.io/nuova-password.html` (più `http://localhost:5173/**` per provare in locale)
 3. **Authentication → Sign In / Providers → Email**: lasciare attivi "Enable email signups" e
    "Confirm email" (l'hub mostra il messaggio "controlla la posta" e il pulsante per rimandare l'email).
+
+## Salvataggi condizionali Officina 1907
+
+Il gioco Officina importa lo stesso `/hub/saves.js`. `loadVersioned(expectedUserId, gameId, slot)` restituisce `{data, version}` oppure null, verificando prima l’account. `saveVersioned(expectedUserId, gameId, data, expectedVersion, slot)` restituisce `saved` con la nuova `version`, `conflict` oppure `account-changed`. La versione è `updated_at`: l’aggiornamento la confronta nello stesso comando SQL; null inserisce solo una riga assente. Nessuna migrazione SQL. Gli argomenti e il comportamento di `load/save` esistenti restano invariati.
+
+Officina usa `game_id=officina-1907`, slot `active`, e conserva una copia locale separata per ospite/account. Con un SDK precedente resta in locale: non ripiega su upsert senza controllo account/versione. La protezione effettiva continua a dipendere dalle policy `saves` già previste. I test usano un client simulato, non attestano RLS o persistenza live.
